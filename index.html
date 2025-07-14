@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Shop Recommender (INTERVIEW TASK)</title>
+</head>
+<body>
+  <h1>AI Shop & Product Recommender </h1>
+  <input id="userQuery" type="text" placeholder="e.g., skincare for oily skin" style="width: 300px;">
+  <button onclick="getRecommendation()">Get Recommendation</button>
+  <pre id="result" style="white-space: pre-wrap; margin-top: 20px;"></pre>
+  <script>
+    async function getRecommendation() {
+      const userQuery = document.getElementById("userQuery").value;
+      const response = await fetch("/recommend", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ query: userQuery })
+      });
+      const data = await response.json();
+      document.getElementById("result").textContent = data.response;
+    }
+  </script>
+</body>
+</html>
